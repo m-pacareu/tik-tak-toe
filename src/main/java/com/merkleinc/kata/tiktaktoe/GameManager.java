@@ -43,4 +43,17 @@ public class GameManager {
 
         return result;
     }
+
+    public boolean existsWiningDiagonal() {
+        boolean result = false;
+        Players[] grid = boardGame.getGrid();
+        //Descendant diagonal
+        if (grid[0] != null && grid[0] == grid[4] && grid[4] == grid[8] ||
+        //Ascendant diagonal
+                grid[6] != null && grid[6] == grid[4] && grid[4] == grid[2]
+        ){
+            result = true;
+        }
+        return result;
+    }
 }

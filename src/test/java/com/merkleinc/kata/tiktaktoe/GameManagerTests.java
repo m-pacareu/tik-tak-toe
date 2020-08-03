@@ -79,4 +79,25 @@ public class GameManagerTests {
     }
 
 
+    /**
+     * a game is over when all fields in a diagonal are taken by a player
+     */
+    @Test
+    public void existsWinningDiagonal_winningDescDiag(){
+        Players[] expectedGrid = {X, O, null, O, X, null, null, O, X};
+        when(boardGame.getGrid()).thenReturn(expectedGrid);
+        assertTrue(gameManager.existsWiningDiagonal());
+    }
+    @Test
+    public void existsWinningDiagonal_winningAscDiag(){
+        Players[] expectedGrid = {null, X, X, null, X, null, X, O, O};
+        when(boardGame.getGrid()).thenReturn(expectedGrid);
+        assertTrue(gameManager.existsWiningDiagonal());
+    }
+    @Test
+    public void existsWinningDiagonal_nullDiags(){
+        Players[] expectedGrid = {null, null, null, null, null, null,null, null, null};
+        when(boardGame.getGrid()).thenReturn(expectedGrid);
+        assertFalse(gameManager.existsWiningDiagonal());
+    }
 }
