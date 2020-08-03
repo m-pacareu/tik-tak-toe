@@ -2,21 +2,20 @@ package com.merkleinc.kata.tiktaktoe;
 
 import com.merkleinc.kata.tiktaktoe.model.BoardGame;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
-@SpringBootConfiguration
+/**
+ * a game has nine fields in a 3x3 grid
+ */
 public class BoardGameTests {
 
+
     /**
-     * a game has nine fields in a 3x3 grid
+     * Size  tests
      */
     @Test
     public void heightSize(){
@@ -32,9 +31,25 @@ public class BoardGameTests {
 
         BoardGame boardGame = new BoardGame();
 
-        assertEquals(3, boardGame.getWith());
+        assertEquals(3, boardGame.getWidth());
 
     }
 
 
+    /**
+     * Grid tests
+     */
+
+    @Test
+    public void gridNotNull(){
+        BoardGame boardGame = new BoardGame();
+
+        assertNotNull(boardGame.getGrid());
+    }
+
+    @Test
+    public void totalFields_equalsNine(){
+        BoardGame boardGame = new BoardGame();
+        assertEquals(9, boardGame.getTotalFields());
+    }
 }
