@@ -3,13 +3,11 @@ package com.merkleinc.kata.tiktaktoe.model;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static com.merkleinc.kata.tiktaktoe.model.Players.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-/**
- * a game has nine fields in a 3x3 grid
- */
+
 public class BoardGameTests {
 
 
@@ -55,8 +53,10 @@ public class BoardGameTests {
     @Test
     public void setterGetterGrid_indirectTest(){
         BoardGame boardGame = new BoardGame();
-        String[] demoBoard = {"X", "O", null, "A","","0","9","x","o"};
+        Players[] demoBoard = {X, O, null,null,null,null,null,null,null, };
         boardGame.setGrid(demoBoard);
         assertEquals(demoBoard, boardGame.getGrid());
     }
+
+
 }
