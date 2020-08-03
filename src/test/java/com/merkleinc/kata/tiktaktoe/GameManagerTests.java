@@ -100,4 +100,31 @@ public class GameManagerTests {
         when(boardGame.getGrid()).thenReturn(expectedGrid);
         assertFalse(gameManager.existsWiningDiagonal());
     }
+
+        /**
+         * a game is over when all fields are taken
+         */
+
+    @Test
+    public void isGridFull_emptyGrid(){
+        Players[] expectedGrid = {null, null, null, null, null, null, null, null, null};
+        when(boardGame.getGrid()).thenReturn(expectedGrid);
+        assertFalse(gameManager.isGridFull());
+    }
+
+    @Test
+    public void isGridFull_emptySlots(){
+        Players[] expectedGrid = {null, X, X, null, X, null, X, O, O};
+        when(boardGame.getGrid()).thenReturn(expectedGrid);
+        assertFalse(gameManager.isGridFull());
+    }
+
+    @Test
+    public void isGridFull_fullGrid(){
+        Players[] expectedGrid = {O, X, X, O, X, O, X, O, O};
+        when(boardGame.getGrid()).thenReturn(expectedGrid);
+        assertTrue(gameManager.isGridFull());
+    }
+
+
 }

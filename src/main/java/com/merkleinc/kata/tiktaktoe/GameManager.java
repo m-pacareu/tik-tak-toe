@@ -5,6 +5,11 @@ import com.merkleinc.kata.tiktaktoe.model.Players;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
 @Service
 public class GameManager {
 
@@ -55,5 +60,12 @@ public class GameManager {
             result = true;
         }
         return result;
+    }
+
+    public boolean isGridFull() {
+        boolean result = false;
+        Players[] grid = boardGame.getGrid();
+        List<Players> nullValues = Arrays.asList(grid).stream().filter(Objects::isNull).collect(Collectors.toList());
+        return nullValues.isEmpty();
     }
 }
