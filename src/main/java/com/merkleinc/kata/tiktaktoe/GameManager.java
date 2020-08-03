@@ -17,9 +17,26 @@ public class GameManager {
         //1st row
         if (grid[0] != null && grid[0] == grid[1] && grid[1] == grid[2] ||
                 //2nd row
-                grid[0] != null && grid[3] == grid[4] && grid[4] == grid[5] ||
+                grid[3] != null && grid[3] == grid[4] && grid[4] == grid[5] ||
                 //3rd row
-                grid[0] != null && grid[6] == grid[7] && grid[7] == grid[7]
+                grid[6] != null && grid[6] == grid[7] && grid[7] == grid[8]
+        ) {
+            result = true;
+        }
+
+        return result;
+    }
+
+    public boolean existsWiningCol() {
+        boolean result = false;
+
+        Players[] grid = boardGame.getGrid();
+        //1st col
+        if (grid[0] != null && grid[0] == grid[3] && grid[3] == grid[6] ||
+                //2nd col
+                grid[1] != null && grid[1] == grid[4] && grid[4] == grid[7] ||
+                //3rd col
+                grid[2] != null && grid[2] == grid[5] && grid[5] == grid[8]
         ) {
             result = true;
         }

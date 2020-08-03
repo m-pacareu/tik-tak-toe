@@ -50,6 +50,33 @@ public class GameManagerTests {
         assertFalse(gameManager.existsWinningRow());
     }
 
+    /**
+     * a game is over when all fields in a column are taken by a player
+     */
+    @Test
+    public void existsWinningCol_winningFirstCol(){
+        Players[] expectedGrid = {X, null, null, X, null, null, X, null, X};
+        when(boardGame.getGrid()).thenReturn(expectedGrid);
+        assertTrue(gameManager.existsWiningCol());
+    }
+    @Test
+    public void existsWinningCol_winningSecondCol(){
+        Players[] expectedGrid = {X, O, null, X, O, null, X, O, O};
+        when(boardGame.getGrid()).thenReturn(expectedGrid);
+        assertTrue(gameManager.existsWiningCol());
+    }
+    @Test
+    public void existsWinningCol_winningThirdCol(){
+        Players[] expectedGrid = {X, X, O, X, O, O, O, null, O};
+        when(boardGame.getGrid()).thenReturn(expectedGrid);
+        assertTrue(gameManager.existsWiningCol());
+    }
+    @Test
+    public void existsWinningCol_nullCols(){
+        Players[] expectedGrid = {null, null, null, null, null, null,null, null, null};
+        when(boardGame.getGrid()).thenReturn(expectedGrid);
+        assertFalse(gameManager.existsWiningCol());
+    }
 
 
 }
