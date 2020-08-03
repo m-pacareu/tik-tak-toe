@@ -24,6 +24,10 @@ public class BoardGame {
         return grid;
     }
 
+    public void setGrid(String[] grid) {
+        this.grid = grid;
+    }
+
     public Integer getTotalFields() {
         return this.grid.length;
     }

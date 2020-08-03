@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**
  * a game has nine fields in a 3x3 grid
  */
-public class BoardGameTests {
+public class PlayersTests {
 
 
     /**
