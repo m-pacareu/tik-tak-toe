@@ -11,7 +11,7 @@ public class GameManager {
     @Autowired
     private BoardGame boardGame;
 
-    public boolean existsWiningRow() {
+    public boolean existsWinningRow() {
         boolean result = false;
         Players[] grid = boardGame.getGrid();
         //1st row

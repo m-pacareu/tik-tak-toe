@@ -26,28 +26,28 @@ public class GameManagerTests {
      * a game is over when all fields in a row are taken by a player
      */
     @Test
-    public void existsWiningRow_winingFirstRow(){
+    public void existsWinningRow_winningFirstRow(){
         Players[] expectedGrid = {X, X, X, null, null, null, null, null, null};
         when(boardGame.getGrid()).thenReturn(expectedGrid);
-        assertTrue(gameManager.existsWiningRow());
+        assertTrue(gameManager.existsWinningRow());
     }
     @Test
-    public void existsWiningRow_winingSecondtRow(){
+    public void existsWinningRow_winningSecondtRow(){
         Players[] expectedGrid = {X, X, null, O, O, O, null, null, null};
         when(boardGame.getGrid()).thenReturn(expectedGrid);
-        assertTrue(gameManager.existsWiningRow());
+        assertTrue(gameManager.existsWinningRow());
     }
     @Test
-    public void existsWiningRow_winingThirdRow(){
+    public void existsWinningRow_winningThirdRow(){
         Players[] expectedGrid = {X, X, null, X, O, O, X, X, X};
         when(boardGame.getGrid()).thenReturn(expectedGrid);
-        assertTrue(gameManager.existsWiningRow());
+        assertTrue(gameManager.existsWinningRow());
     }
     @Test
-    public void existsWiningRow_nullRows(){
+    public void existsWinningRow_nullRows(){
         Players[] expectedGrid = {null, null, null, null, null, null,null, null, null};
         when(boardGame.getGrid()).thenReturn(expectedGrid);
-        assertFalse(gameManager.existsWiningRow());
+        assertFalse(gameManager.existsWinningRow());
     }
 
 
