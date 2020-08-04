@@ -1,6 +1,7 @@
 package com.merkleinc.kata.tiktaktoe;
 
 import com.merkleinc.kata.tiktaktoe.exceptions.FullBoardGameException;
+import com.merkleinc.kata.tiktaktoe.exceptions.NotEmptyCellException;
 import com.merkleinc.kata.tiktaktoe.model.BoardGame;
 import com.merkleinc.kata.tiktaktoe.model.Players;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,8 +80,12 @@ public class GameManager {
         if(isGridFull()){
             throw new FullBoardGameException("Full boardgame. Game should have ended before last movement.");
         }
+        if (grid[i] != null){
+            throw new NotEmptyCellException("Cannot take field that has been alredy taken.");
+        }
         grid[i] = playersManager.nextPlayer();
 
+        boardGame.setGrid(grid);
 
         return grid;
     }

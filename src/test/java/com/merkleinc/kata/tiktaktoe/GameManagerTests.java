@@ -1,6 +1,7 @@
 package com.merkleinc.kata.tiktaktoe;
 
 import com.merkleinc.kata.tiktaktoe.exceptions.FullBoardGameException;
+import com.merkleinc.kata.tiktaktoe.exceptions.NotEmptyCellException;
 import com.merkleinc.kata.tiktaktoe.model.BoardGame;
 import com.merkleinc.kata.tiktaktoe.model.Players;
 import org.junit.jupiter.api.Test;
@@ -155,5 +156,16 @@ public class GameManagerTests {
         when(boardGame.getGrid()).thenReturn(initialGrid);
         when(playersManager.nextPlayer()).thenReturn(O);
         assertThrows(FullBoardGameException.class, () -> gameManager.nextMove(0));
+    }
+
+    /**
+     * a player can take a field if not already taken
+     */
+    @Test
+    public void nextMove_nonEmptyCell(){
+        Players[] initialGrid = {null, null, null, null, X, null, null, null, null};
+        when(boardGame.getGrid()).thenReturn(initialGrid);
+        when(playersManager.nextPlayer()).thenReturn(O);
+        assertThrows(NotEmptyCellException.class, () -> gameManager.nextMove(4));
     }
 }
