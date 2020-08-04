@@ -2,12 +2,30 @@ package com.merkleinc.kata.tiktaktoe;
 
 import com.merkleinc.kata.tiktaktoe.model.Players;
 
+import static com.merkleinc.kata.tiktaktoe.model.Players.O;
+import static com.merkleinc.kata.tiktaktoe.model.Players.X;
+
 public class PlayersManager {
 
-    public Players validatePlayer(String player) {
-        if (player == null){
-            throw new IllegalArgumentException("String player representation should not be null");
+    private Players lastPlayer = O;
+
+    public Players getLastPlayer() {
+        return this.lastPlayer;
+    }
+
+    public Players nextPlayer() {
+        switch (lastPlayer){
+            case X:
+                lastPlayer = O;
+                break;
+            case O:
+                lastPlayer = X;
+                break;
         }
-        return Players.valueOf(player.toUpperCase());
+        return lastPlayer;
+    }
+
+    public void setLastPlayer(Players lastPlayer) {
+        this.lastPlayer = lastPlayer;
     }
 }
