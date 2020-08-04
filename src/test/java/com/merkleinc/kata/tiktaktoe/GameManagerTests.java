@@ -1,5 +1,6 @@
 package com.merkleinc.kata.tiktaktoe;
 
+import com.merkleinc.kata.tiktaktoe.exceptions.FullBoardGameException;
 import com.merkleinc.kata.tiktaktoe.model.BoardGame;
 import com.merkleinc.kata.tiktaktoe.model.Players;
 import org.junit.jupiter.api.Test;
@@ -9,8 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static com.merkleinc.kata.tiktaktoe.model.Players.O;
 import static com.merkleinc.kata.tiktaktoe.model.Players.X;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -18,6 +18,8 @@ public class GameManagerTests {
 
     @Mock
     BoardGame boardGame;
+    @Mock
+    PlayersManager playersManager;
 
     @InjectMocks
     GameManager gameManager;
@@ -126,5 +128,32 @@ public class GameManagerTests {
         assertTrue(gameManager.isGridFull());
     }
 
+    /**
+     * players take turns taking fields until the game is over
+     */
 
+    @Test
+    public void nextMove_firstTurn(){
+        Players[] expectedGrid = {null, null, null, null, X, null, null, null, null};
+        Players[] initialGrid = {null, null, null, null, null, null, null, null, null};
+        when(boardGame.getGrid()).thenReturn(initialGrid);
+        when(playersManager.nextPlayer()).thenReturn(X);
+        assertArrayEquals(expectedGrid, gameManager.nextMove(4));
+    }
+    @Test
+    public void nextMove_secondTurn(){
+        Players[] expectedGrid = {O, null, null, null, X, null, null, null, null};
+        Players[] initialGrid = {null, null, null, null, X, null, null, null, null};
+        when(boardGame.getGrid()).thenReturn(initialGrid);
+        when(playersManager.nextPlayer()).thenReturn(O);
+        assertArrayEquals(expectedGrid, gameManager.nextMove(0));
+    }
+
+    @Test
+    public void nextMove_extraTurnNotAllowed(){
+        Players[] initialGrid = {O, X, O, X, X, O, O, X, O};
+        when(boardGame.getGrid()).thenReturn(initialGrid);
+        when(playersManager.nextPlayer()).thenReturn(O);
+        assertThrows(FullBoardGameException.class, () -> gameManager.nextMove(0));
+    }
 }

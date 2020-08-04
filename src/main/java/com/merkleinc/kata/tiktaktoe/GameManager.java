@@ -1,5 +1,6 @@
 package com.merkleinc.kata.tiktaktoe;
 
+import com.merkleinc.kata.tiktaktoe.exceptions.FullBoardGameException;
 import com.merkleinc.kata.tiktaktoe.model.BoardGame;
 import com.merkleinc.kata.tiktaktoe.model.Players;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class GameManager {
 
     @Autowired
     private BoardGame boardGame;
+
+    @Autowired
+    PlayersManager playersManager;
 
     public boolean existsWinningRow() {
         boolean result = false;
@@ -67,5 +71,17 @@ public class GameManager {
         Players[] grid = boardGame.getGrid();
         List<Players> nullValues = Arrays.asList(grid).stream().filter(Objects::isNull).collect(Collectors.toList());
         return nullValues.isEmpty();
+    }
+
+    public Players[] nextMove(int i) {
+        Players[] grid = boardGame.getGrid();
+
+        if(isGridFull()){
+            throw new FullBoardGameException("Full boardgame. Game should have ended before last movement.");
+        }
+        grid[i] = playersManager.nextPlayer();
+
+
+        return grid;
     }
 }
